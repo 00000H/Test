@@ -156,7 +156,7 @@
 
 主机或路由器发送数据帧所需要的时间。
 
-<img src="https://latex.codecogs.com/gif.latex?delay=\frac{l(bit)}{v(bit/s)}"/>
+<img src="https://latex.codecogs.com/gif.latex?delay=\frac{l(bit)}{v(bit/s)}"/>$$
 
 其中 l 表示数据帧的长度，v 表示发送速率。
 
@@ -164,7 +164,7 @@
 
 电磁波在信道中传播一定的距离需要花费的时间，电磁波传播速度接近光速。
 
-<img src="https://latex.codecogs.com/gif.latex?delay=\frac{l(m)}{v(m/s)}"/>
+<img src="https://latex.codecogs.com/gif.latex?delay=\frac{l(m)}{v(m/s)}"/>$$
 
 其中 l 表示信道长度，v 表示电磁波在信道上的传播速率。
 
@@ -257,21 +257,21 @@ TCP/IP 协议族是一种沙漏形状，中间小两边大，IP 协议在其中�
 
 ### 4. 码分复用
 
-为每个用户分配 m bit 的码片，并且所有的码片正交，对于任意两个码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/> 和 $\vec{T}$ 有 和 <img src="https://latex.codecogs.com/gif.latex?\vec{T}"/> 有 有
+为每个用户分配 m bit 的码片，并且所有的码片正交，对于任意两个码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/><img src="https://latex.codecogs.com/gif.latex?和"/><img src="https://latex.codecogs.com/gif.latex?\vec{T}"/>$ 有
 
-<img src="https://latex.codecogs.com/gif.latex?\vec{S}\cdot\vec{T}=0"/>
+<img src="https://latex.codecogs.com/gif.latex?\vec{S}\cdot\vec{T}=0"/>$$
 
-为了方便，取 m=8，设码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/> 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
+为了方便，取 m=8，设码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/>$ 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
 
 在计算时将 00011011 记作 (-1 -1 -1 +1 +1 -1 +1 +1)，可以得到
 
-<img src="https://latex.codecogs.com/gif.latex?\frac{1}{m}\vec{S}\cdot\vec{S}=1"/>
+<img src="https://latex.codecogs.com/gif.latex?\frac{1}{m}\vec{S}\cdot\vec{S}=1"/>$$
 
-<img src="https://latex.codecogs.com/gif.latex?\frac{1}{m}\vec{S}\cdot\vec{S'}=-1"/>
+<img src="https://latex.codecogs.com/gif.latex?\frac{1}{m}\vec{S}\cdot\vec{S'}=-1"/>$$
 
-其中 <img src="https://latex.codecogs.com/gif.latex?\vec{S'}"/> 为 $\vec{S}$ 的反码。 为 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/> 的反码。 的反码。
+其中 <img src="https://latex.codecogs.com/gif.latex?\vec{S'}"/><img src="https://latex.codecogs.com/gif.latex?为"/><img src="https://latex.codecogs.com/gif.latex?\vec{S}"/>$ 的反码。
 
-利用上面的式子我们知道，当接收端使用码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/> 对接收到的数据进行内积运算时，结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。 对接收到的数据进行内积运算时，结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。
+利用上面的式子我们知道，当接收端使用码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/>$ 对接收到的数据进行内积运算时，结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。
 
 码分复用需要发送的数据量为原先的 m 倍。
 
@@ -666,11 +666,11 @@ TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文�
 
 一个报文段从发送再到接收到确认所经过的时间称为往返时间 RTT，加权平均往返时间 RTTs 计算如下：
 
-<img src="https://latex.codecogs.com/gif.latex?RTTs=(1-a)*(RTTs)+a*RTT"/>
+<img src="https://latex.codecogs.com/gif.latex?RTTs=(1-a)*(RTTs)+a*RTT"/>$$
 
 超时时间 RTO 应该略大于 RRTs，TCP 使用的超时时间计算如下：
 
-<img src="https://latex.codecogs.com/gif.latex?RTO=RTTs+4*RTT_d"/>
+<img src="https://latex.codecogs.com/gif.latex?RTO=RTTs+4*RTT_d"/>$$
 
 其中 RTT<sub>d</sub> 为偏差，它与新的 RRT 和 RRTs 有关。
 
