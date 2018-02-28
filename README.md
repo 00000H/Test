@@ -1,431 +1,407 @@
 <!-- GFM-TOC -->
-* [基础概念](#基础概念)
-    * [Web 基础](#web-基础)
-    * [URL](#url)
-    * [请求和响应报文](#请求和响应报文)
-* [HTTP 方法](#http-方法)
-    * [GET：获取资源](#get获取资源)
-    * [POST：传输实体主体](#post传输实体主体)
-    * [HEAD：获取报文首部](#head获取报文首部)
-    * [PUT：上传文件](#put上传文件)
-    * [DELETE：删除文件](#delete删除文件)
-    * [OPTIONS：查询支持的方法](#options查询支持的方法)
-    * [TRACE：追踪路径](#trace追踪路径)
-    * [CONNECT：要求用隧道协议连接代理](#connect要求用隧道协议连接代理)
-* [HTTP 状态码](#http-状态码)
-    * [2XX 成功](#2xx-成功)
-    * [3XX 重定向](#3xx-重定向)
-    * [4XX 客户端错误](#4xx-客户端错误)
-    * [5XX 服务器错误](#5xx-服务器错误)
-* [HTTP 首部](#http-首部)
-    * [通用首部字段](#通用首部字段)
-    * [请求首部字段](#请求首部字段)
-    * [响应首部字段](#响应首部字段)
-    * [实体首部字段](#实体首部字段)
-* [具体应用](#具体应用)
-    * [Cookie](#cookie)
-    * [缓存](#缓存)
-    * [持久连接](#持久连接)
-    * [编码](#编码)
-    * [分块传输](#分块传输)
-    * [多部分对象集合](#多部分对象集合)
-    * [范围请求](#范围请求)
-    * [内容协商](#内容协商)
-    * [虚拟主机](#虚拟主机)
-    * [通信数据转发](#通信数据转发)
-* [HTTPs](#https)
-    * [加密](#加密)
-    * [认证](#认证)
-    * [完整性](#完整性)
-* [HTTP/1.0 与 HTTP/1.1 的区别](#http10-与-http11-的区别)
+* [概览](#概览)
+* [磁盘操作](#磁盘操作)
+* [字节操作](#字节操作)
+* [字符操作](#字符操作)
+* [对象操作](#对象操作)
+* [网络操作](#网络操作)
+    * [1. InetAddress](#1-inetaddress)
+    * [2. URL](#2-url)
+    * [3. Sockets](#3-sockets)
+    * [4. Datagram](#4-datagram)
+* [NIO](#nio)
+    * [1. 流与块](#1-流与块)
+    * [2. 通道与缓冲区](#2-通道与缓冲区)
+        * [2.1 通道](#21-通道)
+        * [2.2 缓冲区](#22-缓冲区)
+    * [3. 缓冲区状态变量](#3-缓冲区状态变量)
+    * [4. 读写文件实例](#4-读写文件实例)
+    * [5. 阻塞与非阻塞](#5-阻塞与非阻塞)
+        * [5.1 阻塞式 I/O](#51-阻塞式-io)
+        * [5.2 非阻塞式 I/O](#52-非阻塞式-io)
+    * [6. 套接字实例](#6-套接字实例)
+        * [6.1 ServerSocketChannel](#61-serversocketchannel)
+        * [6.2 Selectors](#62-selectors)
+        * [6.3 主循环](#63-主循环)
+        * [6.4 监听新连接](#64-监听新连接)
+        * [6.5 接受新的连接](#65-接受新的连接)
+        * [6.6 删除处理过的 SelectionKey](#66-删除处理过的-selectionkey)
+        * [6.7 传入的 I/O](#67-传入的-io)
+* [参考资料](#参考资料)
 <!-- GFM-TOC -->
 
 
-```
-x ^ 0s = x      x & 0s = 0      x | 0s = x
-x ^ 1s = ~x     x & 1s = x      x | 1s = 1s
-x ^ x = 0       x & x = x       x | x = x
-```
+# 概览
 
-为每个用户分配 m bit 的码片，并且所有的码片正交，对于任意两个码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/> 和 <img src="https://latex.codecogs.com/gif.latex?\vec{T}"/> 有
+Java 的 I/O 大概可以分成以下几类
 
-<div align="center"><img src="https://latex.codecogs.com/gif.latex?\vec{S}\cdot\vec{T}=0"/></div>
+1. 磁盘操作：File
+2. 字节操作：InputStream 和 OutputStream
+3. 字符操作：Reader 和 Writer
+4. 对象操作：Serializable
+5. 网络操作：Socket
+6. 非阻塞式 IO：NIO
 
-为了方便，取 m=8，设码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/> 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
+# 磁盘操作
 
-在计算时将 00011011 记作 (-1 -1 -1 +1 +1 -1 +1 +1)，可以得到
+File 类可以用于表示文件和目录，但是它只用于表示文件的信息，而不表示文件的内容。
 
-<div align="center"><img src="https://latex.codecogs.com/gif.latex?\frac{1}{m}\vec{S}\cdot\vec{S}=1"/></div>
+# 字节操作
 
-<div align="center"><img src="https://latex.codecogs.com/gif.latex?\frac{1}{m}\vec{S}\cdot\vec{S'}=-1"/></div>
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//8143787f-12eb-46ea-9bc3-c66d22d35285.jpg)
 
-其中 <img src="https://latex.codecogs.com/gif.latex?\vec{S'}"/> 为 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/> 的反码。
+Java I/O 使用了装饰者模式来实现。以 InputStream 为例，InputStream 是抽象组件，FileInputStream 是 InputStream 的子类，属于具体组件，提供了字节流的输入操作。FilterInputStream 属于抽象装饰者，装饰者用于装饰组件，为组件提供额外的功能，例如 BufferedInputStream 为 FileInputStream 提供缓存的功能。实例化一个具有缓存功能的字节流对象时，只需要在 FileInputStream 对象上再套一层 BufferedInputStream 对象即可。
 
-利用上面的式子我们知道，当接收端使用码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}"/> 对接收到的数据进行内积运算时，结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。
-
-码分复用需要发送的数据量为原先的 m 倍。
-
-# 基础概念
-
-## Web 基础
-
-- HTTP（HyperText Transfer Protocol，超为本传输协议）。
-- WWW（Word Wide Web）的三种技术：HTML、HTTP、URL。
-- RFC（Request for Comments，征求修正意见书），互联网的设计文档。
-
-## URL
-
-- URI（Uniform Resource Indentifier，统一资源标识符）
-- URL（Uniform Resource Locator，统一资源定位符）
-- URN（Uniform Resource Name，统一资源名称），例如 urn:isbn:0-486-27557-4 。
-
-URI 包含 URL 和 URN，目前 WEB 只有 URL 比较流行，所以见到的基本都是 URL。
-
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//4102b7d0-39b9-48d8-82ae-ac4addb7ebfb.jpg)
-
-## 请求和响应报文
-
-**请求报文**
-
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//9dbb5fc2-936b-4c6d-b3a7-9617aae45080.jpg)
-
-**响应报文**
-
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c634b5ed-a14b-4302-b40e-3ee387dd3c8a.jpg)
-
-# HTTP 方法
-
-客户端发送的请求报文第一行为请求行，包含了方法字段。
-
-## GET：获取资源
-
-## POST：传输实体主体
-
-POST 主要目的不是获取资源，而是传输实体主体数据。
-
-GET 和 POST 的请求都能使用额外的参数，但是 GET 的参数是以查询字符串出现在 URL中，而 POST 的参数存储在实体主体部分。
-
-```
-GET /test/demo_form.asp?name1=value1&name2=value2 HTTP/1.1
-```
-```
-POST /test/demo_form.asp HTTP/1.1
-Host: w3schools.com
-name1=value1&name2=value2
+```java
+BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 ```
 
-GET 的传参方式相比于 POST 安全性较差，因为 GET 传的参数在 URL 是可见的，可能会泄露私密信息。并且 GET 只支持 ASCII 字符，如果参数为中文则可能会出现乱码，而 POST 支持标准字符集。
+DataInputStream 装饰者提供了对更多数据类型进行输入的操作，比如 int、double 等基本类型。
 
-## HEAD：获取报文首部
+批量读入文件中的内容到字节数组中
 
-和 GET 方法一样，但是不返回报文实体主体部分。
+```java
+byte[] buf = new byte[20*1024];
+int bytes = 0;
+// 最多读取 buf.length 个字节，返回的是实际读取的个数，返回 -1 的时候表示读到 eof，即文件尾
+while((bytes = in.read(buf, 0 , buf.length)) != -1) {
+    // ...
+}
+```
 
-主要用于确认 URL 的有效性以及资源更新的日期时间等。
+# 字符操作
 
-## PUT：上传文件
+不管是磁盘还是网络传输，最小的存储单元都是字节，而不是字符，所以 I/O 操作的都是字节而不是字符。但是在程序中操作的数据通常是字符形式，因此需要提供对字符进行操作的方法。
 
-由于自身不带验证机制，任何人都可以上传文件，因此存在安全性问题，一般 WEB 网站不使用该方法。
+InputStreamReader 实现从文本文件的字节流解码成字符流；OutputStreamWriter 实现字符流编码成为文本文件的字节流。它们都继承自 Reader 和 Writer。
 
-## DELETE：删除文件
+编码就是把字符转换为字节，而解码是把字节重新组合成字符。
 
-与 PUT 功能相反，并且同样不带验证机制。
+```java
+byte[] bytes = str.getBytes(encoding);     // 编码
+String str = new String(bytes, encoding)； // 解码
+```
 
-## OPTIONS：查询支持的方法
+GBK 编码中，中文占 2 个字节，英文占 1 个字节；UTF-8 编码中，中文占 3 个字节，英文占 1 个字节；Java 使用双字节编码 UTF-16be，中文和英文都占 2 个字节。
 
-查询指定的 URL 能够支持的方法。
+如果编码和解码过程使用不同的编码方式那么就出现了乱码。
 
-会返回 Allow: GET, POST, HEAD, OPTIONS 这样的内容。
+# 对象操作
 
-## TRACE：追踪路径
+序列化就是将一个对象转换成字节序列，方便存储和传输。
 
-服务器会将通信路径返回给客户端。
+序列化：ObjectOutputStream.writeObject()
 
-发送请求时，在 Max-Forwards 首部字段中填入数值，每经过一个服务器就会减 1，当数值为 0 时就停止传输。
+反序列化：ObjectInputStream.readObject()
 
-TRACE 一般不会使用，并且它容易受到 XST 攻击（Cross-Site Tracing，跨站追踪），因此更不会去使用它。
+序列化的类需要实现 Serializable 接口，它只是一个标准，没有任何方法需要实现。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//ca711108-e937-4d7d-99aa-61b325c61f1a.jpg)
+transient 关键字可以使一些属性不会被序列化。
 
-## CONNECT：要求用隧道协议连接代理
+**ArrayList 序列化和反序列化的实现**：ArrayList 中存储数据的数组是用 transient 修饰的，因为这个数组是动态扩展的，并不是所有的空间都被使用，因此就不需要所有的内容都被序列化。通过重写序列化和反序列化方法，使得可以只序列化数组中有内容的那部分数据。
 
-主要使用 SSL（Secure Sokets Layer，安全套接字）和 TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输。
+```
+private transient Object[] elementData;
+```
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//d8355d56-aa2b-4452-8001-8475cc095af1.jpg)
+# 网络操作
 
-# HTTP 状态码
+Java 中的网络支持：
 
-服务器返回的响应报文中第一行为状态行，包含了状态码以及原因短语，来告知客户端请求的结果。
+1. InetAddress：用于表示网络上的硬件资源，即 IP 地址；
+2. URL：统一资源定位符，通过 URL 可以直接读取或者写入网络上的数据；
+3. Sockets：使用 TCP 协议实现网络通信；
+4. Datagram：使用 UDP 协议实现网络通信。
 
-| 状态码 | 类别 | 原因短语 |
-| --- | --- | --- |
-| 1XX | Informational（信息性状态码） | 接收的请求正在处理 |
-| 2XX | Success（成功状态码） | 请求正常处理完毕 |
-| 3XX | Redirection（重定向状态码） | 需要进行附加操作以完成请求 |
-| 4XX | Client Error（客户端错误状态码） | 服务器无法处理请求 |
-| 5XX | Server Error（服务器错误状态码） | 服务器处理请求出错 |
+## 1. InetAddress
 
-## 2XX 成功
+没有公有构造函数，只能通过静态方法来创建实例，比如 InetAddress.getByName(String host)、InetAddress.getByAddress(byte[] addr)。
 
-- **200 OK**
+## 2. URL
 
-- **204 No Content**：请求已经成功处理，但是返回的响应报文不包含实体的主体部分。一般在只需要从客户端往服务器发送信息，而不需要返回数据时使用。
+可以直接从 URL 中读取字节流数据
 
-- **206 Partial Content**
+```java
+URL url = new URL("http://www.baidu.com");
+InputStream is = url.openStream(); // 字节流
+InputStreamReader isr = new InputStreamReader(is, "utf-8");                              // 字符流
+BufferedReader br = new BufferedReader(isr);
+String line = br.readLine();
+while (line != null) {
+    System.out.println(line);
+    line = br.readLine();
+}
+br.close();
+isr.close();
+is.close();
+```
 
-## 3XX 重定向
+## 3. Sockets
 
-- **301 Moved Permanently**：永久性重定向
+Socket 通信模型
 
-- **302 Found**：临时性重定向
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//fa4101d7-19ce-4a69-a84f-20bbe64320e5.jpg)
 
-- **303 See Other**
+- ServerSocket：服务器端类
+- Socket：客户端类
 
-- 注：虽然 HTTP 协议规定 301、302 状态下重定向时不允许把 POST 方法改成 GET 方法，但是大多数浏览器都会 在 301、302 和 303 状态下的重定向把 POST 方法改成 GET 方法。
+服务器和客户端通过 InputStream 和 OutputStream 进行输入输出。
 
-- **304 Not Modified**：如果请求报文首部包含一些条件，例如：If-Match，If-ModifiedSince，If-None-Match，If-Range，If-Unmodified-Since，但是不满足条件，则服务器会返回 304 状态码。
+## 4. Datagram
 
-- **307 Temporary Redirect**：临时重定向，与 302 的含义类似，但是 307 要求浏览器不会把重定向请求的 POST 方法改成 GET 方法。
+- DatagramPacket：数据包类
+- DatagramSocket：通信类
 
-## 4XX 客户端错误
+# NIO
 
-- **400 Bad Request**：请求报文中存在语法错误
+NIO 将最耗时的 I/O 操作 ( 即填充和提取缓冲区 ) 转移回操作系统，因而 不需要程序员去控制就可以极大地提高运行速度。
 
-- **401 Unauthorized**：该状态码表示发送的请求需要有通过 HTTP 认证（BASIC 认证、DIGEST 认证）的认证信息。如果之前已进行过一次请求，则表示用户认证失败。
+## 1. 流与块
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//b1b4cf7d-c54a-4ff1-9741-cd2eea331123.jpg)
+I/O 与 NIO 最重要的区别是数据打包和传输的方式。正如前面提到的，I/O 以流的方式处理数据，而 NIO 以块的方式处理数据。
 
-- **403 Forbidden**：请求被拒绝，服务器端没有必要给出拒绝的详细理由。
+面向流的 I/O 一次一个字节进行处理数据，一个输入流产生一个字节的数据，一个输出流消费一个字节的数据。为流式数据创建过滤器非常容易，链接几个过滤器，以便每个过滤器只负责单个复杂处理机制的一部分，这样也是相对简单的。不利的一面是，面向流的 I/O 通常相当慢。
 
-- **404 Not Found**
+一个面向块的 I/O 系统以块的形式处理数据，每一个操作都在一步中产生或者消费一个数据块。按块处理数据比按流处理数据要快得多。但是面向块的 I/O 缺少一些面向流的 I/O 所具有的优雅性和简单性。
 
-## 5XX 服务器错误
+I/O 包和 NIO 已经很好地集成了，java.io.\* 已经以 NIO 为基础重新实现了，所以现在它可以利用 NIO 的一些特性。例如， java.io.\* 包中的一些类包含以块的形式读写数据的方法，这使得即使在更面向流的系统中，处理速度也会更快。
 
-- **500 Internal Server Error**：服务器正在执行请求时发生错误
+## 2. 通道与缓冲区
 
-- **503 Service Unavilable**：该状态码表明服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。
+### 2.1 通道
 
-# HTTP 首部
+通道 Channel 是对原 I/O 包中的流的模拟，可以通过它读取和写入数据。
 
-有 4 种类型的首部字段：通用首部字段、请求首部字段、响应首部字段和实体首部字段。
+通道与流的不同之处在于，流只能在一个方向上移动，(一个流必须是 InputStream 或者 OutputStream 的子类)， 而通道是双向的，可以用于读、写或者同时用于读写。
 
-各种首部字段及其含义如下（不需要全记，仅供查阅）：
+通道包括以下类型：
 
-## 通用首部字段
+- FileChannel：从文件中读写数据；
+- DatagramChannel：通过 UDP 读写网络中数据；
+- SocketChannel：通过 TCP 读写网络中数据；
+- ServerSocketChannel：可以监听新进来的 TCP 连接，对每一个新进来的连接都会创建一个 SocketChannel。
 
-| 首部字段名 | 说明 |
-| -- | -- |
-| Cache-Control | 控制缓存的行为 |
-| Connection | 逐跳首部、 连接的管理 |
-| Date | 创建报文的日期时间 |
-| Pragma | 报文指令 |
-| Trailer | 报文末端的首部一览 |
-| Transfer-Encoding | 指定报文主体的传输编码方式 |
-| Upgrade | 升级为其他协议 |
-| Via | 代理服务器的相关信息 |
-| Warning | 错误通知 |
-
-## 请求首部字段
-
-| 首部字段名 | 说明 |
-| -- | -- |
-| Accept | 用户代理可处理的媒体类型 |
-| Accept-Charset | 优先的字符集 |
-| Accept-Encoding | 优先的内容编码 |
-| Accept-Language | 优先的语言（自然语言） |
-| Authorization | Web认证信息 |
-| Expect | 期待服务器的特定行为 |
-| From | 用户的电子邮箱地址 |
-| Host | 请求资源所在服务器 |
-| If-Match | 比较实体标记（ETag） |
-| If-Modified-Since | 比较资源的更新时间 |
-| If-None-Match | 比较实体标记（与 If-Match 相反） |
-| If-Range | 资源未更新时发送实体 Byte 的范围请求 |
-| If-Unmodified-Since | 比较资源的更新时间（与If-Modified-Since相反） |
-| Max-Forwards | 最大传输逐跳数 |
-| Proxy-Authorization | 代理服务器要求客户端的认证信息 |
-| Range | 实体的字节范围请求 |
-| Referer | 对请求中 URI 的原始获取方 |
-| TE | 传输编码的优先级 |
-| User-Agent | HTTP 客户端程序的信息 |
+### 2.2 缓冲区
 
-## 响应首部字段
+发送给一个通道的所有对象都必须首先放到缓冲区中；同样地，从通道中读取的任何数据都要读到缓冲区中。也就是说，不会直接对通道进行读写数据，而是先经过缓冲区。
 
-| 首部字段名 | 说明 |
-| -- | -- |
-| Accept-Ranges | 是否接受字节范围请求 |
-| Age | 推算资源创建经过时间 |
-| ETag | 资源的匹配信息 |
-| Location | 令客户端重定向至指定URI |
-| Proxy-Authenticate | 代理服务器对客户端的认证信息 |
-| Retry-After | 对再次发起请求的时机要求 |
-| Server | HTTP服务器的安装信息 |
-| Vary | 代理服务器缓存的管理信息 |
-| WWW-Authenticate | 服务器对客户端的认证信息 |
+缓冲区实质上是一个数组，但它不仅仅是一个数组。缓冲区提供了对数据的结构化访问，而且还可以跟踪系统的读/写进程。
 
-## 实体首部字段
+缓冲区包括以下类型：
 
-| 首部字段名 | 说明 |
-| -- | -- |
-| Allow | 资源可支持的HTTP方法 |
-| Content-Encoding | 实体主体适用的编码方式 |
-| Content-Language | 实体主体的自然语言 |
-| Content-Length | 实体主体的大小（单位： 字节） |
-| Content-Location | 替代对应资源的URI |
-| Content-MD5 | 实体主体的报文摘要 |
-| Content-Range | 实体主体的位置范围 |
-| Content-Type | 实体主体的媒体类型 |
-| Expires | 实体主体过期的日期时间 |
-| Last-Modified | 资源的最后修改日期时间 |
+- ByteBuffer
+- CharBuffer
+- ShortBuffer
+- IntBuffer
+- LongBuffer
+- FloatBuffer
+- DoubleBuffer
 
-# 具体应用
 
-## Cookie
+## 3. 缓冲区状态变量
 
-HTTP 协议是无状态的，主要是为了让 HTTP 协议尽可能简单，使得它能够处理大量事务。HTTP/1.1 引入 Cookie 来保存状态信息。
+- capacity：最大容量；
+- position：当前已经读写的字节数；
+- limit：还可以读写的字节数。
 
-服务器发送的响应报文包含 Set-Cookie 字段，客户端得到响应报文后把 Cookie 内容保存到浏览器中。下次再发送请求时，从浏览器中读出 Cookie 值，在请求报文中包含 Cookie 字段，这样服务器就知道客户端的状态信息了。Cookie 状态信息保存在客户端浏览器中，而不是服务器上。
+状态变量的改变过程：
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//ff17c103-750a-4bb8-9afa-576327023af9.png)
+1\. 新建一个大小为 8 个字节的缓冲区，此时 position 为 0，而 limit == capacity == 9。capacity 变量不会改变，下面的讨论会忽略它。
 
-Set-Cookie 字段有以下属性：
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//1bea398f-17a7-4f67-a90b-9e2d243eaa9a.png)
 
-| 属性 | 说明 |
-| -- | -- |
-| NAME=VALUE | 赋予 Cookie 的名称和其值（必需项） |
-| expires=DATE | Cookie 的有效期（若不明确指定则默认为浏览器关闭前为止） |
-| path=PATH | 将服务器上的文件目录作为 Cookie 的适用对象（若不指定则默认为文档所在的文件目录） |
-| domain=域名 | 作为 Cookie 适用对象的域名（若不指定则默认为创建 Cookie 的服务器的域名） |
-| Secure | 仅在 HTTPS 安全通信时才会发送 Cookie |
-| HttpOnly | 加以限制，使 Cookie 不能被 JavaScript 脚本访问 |
+2\. 从输入通道中读取 3 个字节数据写入缓冲区中，此时 position 移动设为 3，limit 保持不变。
 
-**Session 和 Cookie 区别**
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//4628274c-25b6-4053-97cf-d1239b44c43d.png)
 
-Session 是服务器用来跟踪用户的一种手段，每个 Session 都有一个唯一标识：Session ID。当服务器创建了一个 Session 时，给客户端发送的响应报文就包含了 Set-Cookie 字段，其中有一个名为 sid 的键值对，这个键值对就是 Session ID。客户端收到后就把 Cookie 保存在浏览器中，并且之后发送的请求报文都包含 Session ID。HTTP 就是通过 Session 和 Cookie 这两种方式一起合作来实现跟踪用户状态的，Session 用于服务器端，Cookie 用于客户端。
+3\. 在将缓冲区的数据写到输出通道之前，需要先调用 flip() 方法，这个方法将 limit 设置为当前 position，并将 position 设置为 0。
 
-**浏览器禁用 Cookie 的情况**
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//952e06bd-5a65-4cab-82e4-dd1536462f38.png)
 
-会使用 URL 重写技术，在 URL 后面加上 sid=xxx 。
+4\. 从缓冲区中取 4 个字节到输出缓冲中，此时 position 设为 4。
 
-**使用 Cookie 实现用户名和密码的自动填写**
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//b5bdcbe2-b958-4aef-9151-6ad963cb28b4.png)
 
-网站脚本会自动从 Cookie 中读取用户名和密码，从而实现自动填写。
+5\. 最后需要调用 clear() 方法来清空缓冲区，此时 position 和 limit 都被设置为最初位置。
 
-## 缓存
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//67bf5487-c45d-49b6-b9c0-a058d8c68902.png)
 
-有两种缓存方法：让代理服务器进行缓存和让客户端浏览器进行缓存。
+## 4. 读写文件实例
 
-Cache-Control 用于控制缓存的行为。
+1\. 为要读取的文件创建 FileInputStream，之后通过 FileInputStream 获取输入 FileChannel；
 
-Cache-Control: no-cache 有两种含义，如果是客户端向缓存服务器发送的请求报文中含有该指令，表示客户端不想要缓存的资源；如果是源服务器向缓存服务器发送的响应报文中含有该指令，表示缓存服务器不能对资源进行缓存。
+```java
+FileInputStream fin = new FileInputStream("readandshow.txt");
+FileChannel fic = fin.getChannel();
+```
 
-Expires 字段可以用于告知缓存服务器该资源什么时候会过期。当首部字段 Cache-Control 有指定 max-age 指令时，比起首部字段 Expires，会优先处理 max-age 指令。
+2\. 创建一个容量为 1024 的 Buffer
 
-## 持久连接
+```java
+ByteBuffer buffer = ByteBuffer.allocate(1024);
+```
 
-当浏览器访问一个包含多张图片的 HTML 页面时，除了请求访问 HTML 页面资源，还会请求图片资源，如果每进行一次 HTTP 通信就要断开一次 TCP 连接，连接建立和断开的开销会很大。**持久连接** 只需要进行一次 TCP 连接就能进行多次 HTTP 通信。HTTP/1.1 开始，所有的连接默认都是持久连接。
+3\. 将数据从输入 FileChannel 写入到 Buffer 中，如果没有数据的话， read() 方法会返回 -1
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c73a0b78-5f46-4d2d-a009-dab2a999b5d8.jpg)
+```java
+int r = fcin.read(buffer);
+if (r == -1) {
+     break;
+}
+```
 
-持久连接需要使用 Connection 首部字段进行管理。HTTP/1.1 开始 HTTP 默认是持久化连接的，如果要断开 TCP 连接，需要由客户端或者服务器端提出断开，使用 Connection: close；而在 HTTP/1.1 之前默认是非持久化连接的，如果要维持持续连接，需要使用 Keep-Alive。
+4\. 为要写入的文件创建 FileOutputStream，之后通过 FileOutputStream 获取输出 FileChannel
 
-管线化方式可以同时发送多个请求和响应，而不需要发送一个请求然后等待响应之后再发下一个请求。
+```java
+FileOutputStream fout = new FileOutputStream("writesomebytes.txt");
+FileChannel foc = fout.getChannel();
+```
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//6943e2af-5a70-4004-8bee-b33d60f39da3.jpg)
+5\. 调用 flip() 切换读写
 
-## 编码
+```java
+buffer.flip();
+```
 
-编码（Encoding）主要是为了对实体进行压缩。常用的编码有：gzip、compress、deflate、identity，其中 identity 表示不执行压缩的编码格式。
+6\. 把 Buffer 中的数据读取到输出 FileChannel 中
 
-## 分块传输
+```java
+foc.write(buffer);
+```
 
-分块传输（Chunked Transfer Coding）可以把数据分割成多块，让浏览器逐步显示页面。
+7\. 最后调用 clear() 重置缓冲区
 
-## 多部分对象集合
+```java
+buffer.clear();
+```
 
-一份报文主体内可含有多类型的实体同时发送，每个部分之间用 boundary 字段定义的分隔符进行分隔；每个部分都可以有首部字段。
+## 5. 阻塞与非阻塞
 
-例如，上传多个表单时可以使用如下方式：
+应当注意，FileChannel 不能切换到非阻塞模式，套接字 Channel 可以。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//decb0936-e83c-4a55-840a-fe8aa101ac61.png)
+### 5.1 阻塞式 I/O
 
-## 范围请求
+阻塞式 I/O 在调用 InputStream.read() 方法时会一直等到数据到来时（或超时）才会返回，在调用 ServerSocket.accept() 方法时，也会一直阻塞到有客户端连接才会返回，每个客户端连接过来后，服务端都会启动一个线程去处理该客户端的请求。
 
-如果网络出现中断，服务器只发送了一部分数据，范围请求使得客户端能够只请求未发送的那部分数据，从而避免服务器端重新发送所有数据。
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//edc23f99-c46c-4200-b64e-07516828720d.jpg)
 
-在请求报文首部中添加 Range 字段，然后指定请求的范围，例如 Range : bytes = 5001-10000。请求成功的话服务器发送 206 Partial Content 状态。
+### 5.2 非阻塞式 I/O
 
-## 内容协商
+由一个专门的线程来处理所有的 I/O 事件，并负责分发。
 
-通过内容协商返回最合适的内容，例如根据浏览器的默认语言选择返回中文界面还是英文界面。
+事件驱动机制：事件到的时候触发，而不是同步的去监视事件。
 
-涉及以下首部字段：Accept、Accept-Charset、Accept-Encoding、Accept-Language、Content-Language。
+线程通信：线程之间通过 wait()、notify() 等方式通信，保证每次上下文切换都是有意义的，减少无谓的线程切换。
 
-## 虚拟主机
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//7fcb2fb0-2cd9-4396-bc2d-282becf963c3.jpg)
 
-使用虚拟主机技术，使得一台服务器拥有多个域名，并且在逻辑上可以看成多个服务器。
+## 6. 套接字实例
 
-## 通信数据转发
+### 6.1 ServerSocketChannel
 
-**代理**
+每一个端口都需要有一个 ServerSocketChannel 用来监听连接。
 
-代理服务器接受客户端的请求，并且转发给其它服务器。代理服务器一般是透明的，不会改变 URL。
+```java
+ServerSocketChannel ssc = ServerSocketChannel.open();
+ssc.configureBlocking(false); // 设置为非阻塞
 
-使用代理的主要目的是：缓存、网络访问控制以及记录访问日志。
+ServerSocket ss = ssc.socket();
+InetSocketAddress address = new InetSocketAddress(ports[i]);
+ss.bind(address); // 绑定端口号
+```
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c07035c3-a9ba-4508-8e3c-d8ae4c6ee9ee.jpg)
+### 6.2 Selectors
 
-**网关**
+异步 I/O 通过 Selector 注册对特定 I/O 事件的兴趣 ― 可读的数据的到达、新的套接字连接等等，在发生这样的事件时，系统将会发送通知。
 
-与代理服务器不同的是，网关服务器会将 HTTP 转化为其它协议进行通信，从而请求其它非 HTTP 服务器的服务。
+创建 Selectors 之后，就可以对不同的通道对象调用 register() 方法。register() 的第一个参数总是这个 Selector。第二个参数是 OP_ACCEPT，这里它指定我们想要监听 accept 事件，也就是在新的连接建立时所发生的事件。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//81375888-6be1-476f-9521-42eea3e3154f.jpg)
+SelectionKey 代表这个通道在此 Selector 上的这个注册。当某个 Selector 通知您某个传入事件时，它是通过提供对应于该事件的 SelectionKey 来进行的。SelectionKey 还可以用于取消通道的注册。
 
-**隧道**
+```java
+Selector selector = Selector.open();
+SelectionKey key = ssc.register(selector, SelectionKey.OP_ACCEPT);
+```
 
-使用 SSL 等加密手段，为客户端和服务器之间建立一条安全的通信线路。
+### 6.3 主循环
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//64b95403-d976-421a-8b45-bac89c0b5185.jpg)
+首先，我们调用 Selector 的 select() 方法。这个方法会阻塞，直到至少有一个已注册的事件发生。当一个或者更多的事件发生时， select() 方法将返回所发生的事件的数量。
 
-# HTTPs
+接下来，我们调用 Selector 的 selectedKeys() 方法，它返回发生了事件的 SelectionKey 对象的一个 集合 。
 
-HTTP 有以下安全性问题：
+我们通过迭代 SelectionKeys 并依次处理每个 SelectionKey 来处理事件。对于每一个 SelectionKey，您必须确定发生的是什么 I/O 事件，以及这个事件影响哪些 I/O 对象。
 
-1. 通信使用明文，内容可能会被窃听；
-2. 不验证通信方的身份，因此有可能遭遇伪装；
-3. 无法证明报文的完整性，所以有可能已遭篡改。
+```java
+int num = selector.select();
+ 
+Set selectedKeys = selector.selectedKeys();
+Iterator it = selectedKeys.iterator();
+ 
+while (it.hasNext()) {
+     SelectionKey key = (SelectionKey)it.next();
+     // ... deal with I/O event ...
+}
+```
 
-HTTPs 并不是新协议，而是 HTTP 先和 SSL（Secure Socket Layer）通信，再由 SSL 和 TCP 通信。通过使用 SSL，HTTPs 提供了加密、认证和完整性保护。
+### 6.4 监听新连接
 
-## 加密
+程序执行到这里，我们仅注册了 ServerSocketChannel，并且仅注册它们“接收”事件。为确认这一点，我们对 SelectionKey 调用 readyOps() 方法，并检查发生了什么类型的事件：
 
-有两种加密方式：对称密钥加密和公开密钥加密。对称密钥加密的加密和解密使用同一密钥，而公开密钥加密使用一对密钥用于加密和解密，分别为公开密钥和私有密钥。公开密钥所有人都可以获得，通信发送方获得接收方的公开密钥之后，就可以使用公开密钥进行加密，接收方收到通信内容后使用私有密钥解密。
+```java
+if ((key.readyOps() & SelectionKey.OP_ACCEPT)
+     == SelectionKey.OP_ACCEPT) {
+     // Accept the new connection
+     // ...
+}
+```
 
-对称密钥加密的缺点：无法安全传输密钥；公开密钥加密的缺点：相对来说更耗时。
+可以肯定地说， readOps() 方法告诉我们该事件是新的连接。
 
-HTTPs 采用 **混合的加密机制**，使用公开密钥加密用于传输对称密钥，之后使用对称密钥加密进行通信。（下图中，共享密钥即对称密钥）
+### 6.5 接受新的连接
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//110b1a9b-87cd-45c3-a21d-824623715b33.jpg)
+因为我们知道这个服务器套接字上有一个传入连接在等待，所以可以安全地接受它；也就是说，不用担心 accept() 操作会阻塞：
 
-## 认证
+```java
+ServerSocketChannel ssc = (ServerSocketChannel)key.channel();
+SocketChannel sc = ssc.accept();
+```
 
-通过使用 **证书** 来对通信方进行认证。证书中有公开密钥数据，如果可以验证公开密钥的确属于通信方的，那么就可以确定通信方是可靠的。
+下一步是将新连接的 SocketChannel 配置为非阻塞的。而且由于接受这个连接的目的是为了读取来自套接字的数据，所以我们还必须将 SocketChannel 注册到 Selector上，如下所示：
 
-数字证书认证机构（CA，Certificate Authority）颁发的公开密钥证书，可以通过 CA 对其进行验证。
+```java
+sc.configureBlocking( false );
+SelectionKey newKey = sc.register( selector, SelectionKey.OP_READ );
+```
 
-进行 HTTPs 通信时，服务器会把证书发送给客户端，客户端取得其中的公开密钥之后，就可以开始加密过程。
+注意我们使用 register() 的 OP_READ 参数，将 SocketChannel 注册用于 读取 而不是 接受 新连接。
 
-使用 OpenSSL 这套开源程序，每个人都可以构建一套属于自己的认证机构，从而自己给自己颁发服务器证书。浏览器在访问该服务器时，会显示“无法确认连接安全性”或“该网站的安全证书存在问题”等警告消息。
+### 6.6 删除处理过的 SelectionKey
 
-客户端证书需要用户自行安装，只有在业务需要非常高的安全性时才使用客户端证书，例如网上银行。
+在处理 SelectionKey 之后，我们几乎可以返回主循环了。但是我们必须首先将处理过的 SelectionKey 从选定的键集合中删除。如果我们没有删除处理过的键，那么它仍然会在主集合中以一个激活的键出现，这会导致我们尝试再次处理它。我们调用迭代器的 remove() 方法来删除处理过的 SelectionKey：
 
-## 完整性
+```java
+it.remove();
+```
 
-SSL 提供摘要功能来验证完整性。
+现在我们可以返回主循环并接受从一个套接字中传入的数据(或者一个传入的 I/O 事件)了。
 
-# HTTP/1.0 与 HTTP/1.1 的区别
+### 6.7 传入的 I/O
 
-- HTTP/1.1 默认是长连接；
-- HTTP/1.1 提供了范围请求功能；
-- HTTP/1.1 提供了虚拟主机的功能；
-- HTTP/1.1 多了一些缓存处理字段；
-- HTTP/1.1 多了一些状态码；
+当来自一个套接字的数据到达时，它会触发一个 I/O 事件。这会导致在主循环中调用 Selector.select()，并返回一个或者多个 I/O 事件。这一次， SelectionKey 将被标记为 OP_READ 事件，如下所示：
+
+```java
+} else if ((key.readyOps() & SelectionKey.OP_READ)
+     == SelectionKey.OP_READ) {
+     // Read the data
+     SocketChannel sc = (SocketChannel)key.channel();
+     // ...
+}
+```
+
+
+# 参考资料
+
+- Eckel B, 埃克尔 , 昊鹏 , 等 . Java 编程思想 [M]. 机械工业出版社 , 2002.
+- [IBM: NIO 入门](https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html)
+- [ 深入分析 Java I/O 的工作机制 ](https://www.ibm.com/developerworks/cn/java/j-lo-javaio/index.html)
+- [NIO 与传统 IO 的区别 ](http://blog.csdn.net/shimiso/article/details/24990499)
