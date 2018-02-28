@@ -1,3 +1,45 @@
+<!-- GFM-TOC -->
+* [基础概念](#基础概念)
+    * [Web 基础](#web-基础)
+    * [URL](#url)
+    * [请求和响应报文](#请求和响应报文)
+* [HTTP 方法](#http-方法)
+    * [GET：获取资源](#get获取资源)
+    * [POST：传输实体主体](#post传输实体主体)
+    * [HEAD：获取报文首部](#head获取报文首部)
+    * [PUT：上传文件](#put上传文件)
+    * [DELETE：删除文件](#delete删除文件)
+    * [OPTIONS：查询支持的方法](#options查询支持的方法)
+    * [TRACE：追踪路径](#trace追踪路径)
+    * [CONNECT：要求用隧道协议连接代理](#connect要求用隧道协议连接代理)
+* [HTTP 状态码](#http-状态码)
+    * [2XX 成功](#2xx-成功)
+    * [3XX 重定向](#3xx-重定向)
+    * [4XX 客户端错误](#4xx-客户端错误)
+    * [5XX 服务器错误](#5xx-服务器错误)
+* [HTTP 首部](#http-首部)
+    * [通用首部字段](#通用首部字段)
+    * [请求首部字段](#请求首部字段)
+    * [响应首部字段](#响应首部字段)
+    * [实体首部字段](#实体首部字段)
+* [具体应用](#具体应用)
+    * [Cookie](#cookie)
+    * [缓存](#缓存)
+    * [持久连接](#持久连接)
+    * [编码](#编码)
+    * [分块传输](#分块传输)
+    * [多部分对象集合](#多部分对象集合)
+    * [范围请求](#范围请求)
+    * [内容协商](#内容协商)
+    * [虚拟主机](#虚拟主机)
+    * [通信数据转发](#通信数据转发)
+* [HTTPs](#https)
+    * [加密](#加密)
+    * [认证](#认证)
+    * [完整性](#完整性)
+* [HTTP/1.0 与 HTTP/1.1 的区别](#http10-与-http11-的区别)
+<!-- GFM-TOC -->
+
 
 ```
 x ^ 0s = x      x & 0s = 0      x | 0s = x
@@ -5,16 +47,23 @@ x ^ 1s = ~x     x & 1s = x      x | 1s = 1s
 x ^ x = 0       x & x = x       x | x = x
 ```
 
-<div align="center"><img src="https://latex.codecogs.com/gif.latex?1^{a}" title="1^{a}" /></div>
+为每个用户分配 m bit 的码片，并且所有的码片正交，对于任意两个码片 $\vec{S}$ 和 $\vec{T}$ 有
 
-<img src="https://latex.codecogs.com/gif.latex?\vec{S}" title="1^{a}" />
-
+<img src="https://latex.codecogs.com/gif.latex?\$$\vec{S}\cdot\vec{T}=0$/>
 
 为了方便，取 m=8，设码片 $\vec{S}$ 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
 
-<div align="center">![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$)</div>
+在计算时将 00011011 记作 (-1 -1 -1 +1 +1 -1 +1 +1)，可以得到
 
-![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$)
+<img src="https://latex.codecogs.com/gif.latex?\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$/>
+
+<img src="https://latex.codecogs.com/gif.latex?\$$\frac{1}{m}\vec{S}\cdot\vec{S'}=-1$/>
+
+其中 $\vec{S'}$ 为 $\vec{S}$ 的反码。
+
+利用上面的式子我们知道，当接收端使用码片 $\vec{S}$ 对接收到的数据进行内积运算时，结果为 0 的是其它用户发送的数据，结果为 1 的是用户发送的比特 1，结果为 -1 的是用户发送的比特 0。
+
+码分复用需要发送的数据量为原先的 m 倍。
 
 # 基础概念
 
