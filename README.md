@@ -46,9 +46,7 @@
 ## Web 基础
 
 - HTTP（HyperText Transfer Protocol，超为本传输协议）。
-
 - WWW（Word Wide Web）的三种技术：HTML、HTTP、URL。
-
 - RFC（Request for Comments，征求修正意见书），互联网的设计文档。
 
 ## URL
@@ -59,17 +57,17 @@
 
 URI 包含 URL 和 URN，目前 WEB 只有 URL 比较流行，所以见到的基本都是 URL。
 
-![](index_files/4102b7d0-39b9-48d8-82ae-ac4addb7ebfb.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//4102b7d0-39b9-48d8-82ae-ac4addb7ebfb.jpg)
 
 ## 请求和响应报文
 
 **请求报文**
 
-![](index_files/9dbb5fc2-936b-4c6d-b3a7-9617aae45080.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//9dbb5fc2-936b-4c6d-b3a7-9617aae45080.jpg)
 
 **响应报文**
 
-![](index_files/c634b5ed-a14b-4302-b40e-3ee387dd3c8a.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c634b5ed-a14b-4302-b40e-3ee387dd3c8a.jpg)
 
 # HTTP 方法
 
@@ -122,13 +120,13 @@ GET 的传参方式相比于 POST 安全性较差，因为 GET 传的参数在 U
 
 TRACE 一般不会使用，并且它容易受到 XST 攻击（Cross-Site Tracing，跨站追踪），因此更不会去使用它。
 
-![](index_files/ca711108-e937-4d7d-99aa-61b325c61f1a.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//ca711108-e937-4d7d-99aa-61b325c61f1a.jpg)
 
 ## CONNECT：要求用隧道协议连接代理
 
 主要使用 SSL（Secure Sokets Layer，安全套接字）和 TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输。
 
-![](index_files/d8355d56-aa2b-4452-8001-8475cc095af1.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//d8355d56-aa2b-4452-8001-8475cc095af1.jpg)
 
 # HTTP 状态码
 
@@ -170,7 +168,7 @@ TRACE 一般不会使用，并且它容易受到 XST 攻击（Cross-Site Tracing
 
 - **401 Unauthorized**：该状态码表示发送的请求需要有通过 HTTP 认证（BASIC 认证、DIGEST 认证）的认证信息。如果之前已进行过一次请求，则表示用户认证失败。
 
-![](index_files/b1b4cf7d-c54a-4ff1-9741-cd2eea331123.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//b1b4cf7d-c54a-4ff1-9741-cd2eea331123.jpg)
 
 - **403 Forbidden**：请求被拒绝，服务器端没有必要给出拒绝的详细理由。
 
@@ -263,7 +261,7 @@ HTTP 协议是无状态的，主要是为了让 HTTP 协议尽可能简单，使
 
 服务器发送的响应报文包含 Set-Cookie 字段，客户端得到响应报文后把 Cookie 内容保存到浏览器中。下次再发送请求时，从浏览器中读出 Cookie 值，在请求报文中包含 Cookie 字段，这样服务器就知道客户端的状态信息了。Cookie 状态信息保存在客户端浏览器中，而不是服务器上。
 
-![](index_files/ff17c103-750a-4bb8-9afa-576327023af9.png)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//ff17c103-750a-4bb8-9afa-576327023af9.png)
 
 Set-Cookie 字段有以下属性：
 
@@ -302,13 +300,13 @@ Expires 字段可以用于告知缓存服务器该资源什么时候会过期。
 
 当浏览器访问一个包含多张图片的 HTML 页面时，除了请求访问 HTML 页面资源，还会请求图片资源，如果每进行一次 HTTP 通信就要断开一次 TCP 连接，连接建立和断开的开销会很大。**持久连接** 只需要进行一次 TCP 连接就能进行多次 HTTP 通信。HTTP/1.1 开始，所有的连接默认都是持久连接。
 
-![](index_files/c73a0b78-5f46-4d2d-a009-dab2a999b5d8.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c73a0b78-5f46-4d2d-a009-dab2a999b5d8.jpg)
 
 持久连接需要使用 Connection 首部字段进行管理。HTTP/1.1 开始 HTTP 默认是持久化连接的，如果要断开 TCP 连接，需要由客户端或者服务器端提出断开，使用 Connection: close；而在 HTTP/1.1 之前默认是非持久化连接的，如果要维持持续连接，需要使用 Keep-Alive。
 
 管线化方式可以同时发送多个请求和响应，而不需要发送一个请求然后等待响应之后再发下一个请求。
 
-![](index_files/6943e2af-5a70-4004-8bee-b33d60f39da3.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//6943e2af-5a70-4004-8bee-b33d60f39da3.jpg)
 
 ## 编码
 
@@ -324,7 +322,7 @@ Expires 字段可以用于告知缓存服务器该资源什么时候会过期。
 
 例如，上传多个表单时可以使用如下方式：
 
-![](index_files/decb0936-e83c-4a55-840a-fe8aa101ac61.png)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//decb0936-e83c-4a55-840a-fe8aa101ac61.png)
 
 ## 范围请求
 
@@ -350,19 +348,19 @@ Expires 字段可以用于告知缓存服务器该资源什么时候会过期。
 
 使用代理的主要目的是：缓存、网络访问控制以及记录访问日志。
 
-![](index_files/c07035c3-a9ba-4508-8e3c-d8ae4c6ee9ee.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c07035c3-a9ba-4508-8e3c-d8ae4c6ee9ee.jpg)
 
 **网关**
 
 与代理服务器不同的是，网关服务器会将 HTTP 转化为其它协议进行通信，从而请求其它非 HTTP 服务器的服务。
 
-![](index_files/81375888-6be1-476f-9521-42eea3e3154f.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//81375888-6be1-476f-9521-42eea3e3154f.jpg)
 
 **隧道**
 
 使用 SSL 等加密手段，为客户端和服务器之间建立一条安全的通信线路。
 
-![](index_files/64b95403-d976-421a-8b45-bac89c0b5185.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//64b95403-d976-421a-8b45-bac89c0b5185.jpg)
 
 # HTTPs
 
@@ -382,7 +380,7 @@ HTTPs 并不是新协议，而是 HTTP 先和 SSL（Secure Socket Layer）通信
 
 HTTPs 采用 **混合的加密机制**，使用公开密钥加密用于传输对称密钥，之后使用对称密钥加密进行通信。（下图中，共享密钥即对称密钥）
 
-![](index_files/110b1a9b-87cd-45c3-a21d-824623715b33.jpg)
+![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//110b1a9b-87cd-45c3-a21d-824623715b33.jpg)
 
 ## 认证
 
