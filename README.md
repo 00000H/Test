@@ -55,7 +55,7 @@ x ^ x = 0       x & x = x       x | x = x
 
 在计算时将 00011011 记作 (-1 -1 -1 +1 +1 -1 +1 +1)，可以得到
 
-![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$)
+<div style="align=center">![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$) </div>
 
 ![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S'}=-1$)
 
