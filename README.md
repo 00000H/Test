@@ -49,15 +49,15 @@ x ^ x = 0       x & x = x       x | x = x
 
 为每个用户分配 m bit 的码片，并且所有的码片正交，对于任意两个码片 $\vec{S}$ 和 $\vec{T}$ 有
 
-![](http://latex.codecogs.com/gif.latex?\\\\$$ \vec{S} \cdot \vec{T} = 0 $)
+![](http://latex.codecogs.com/gif.latex?\\\\$$\vec{S}\cdot\vec{T}=0$)
 
 为了方便，取 m=8，设码片 $\vec{S}$ 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
 
 在计算时将 00011011 记作 (-1 -1 -1 +1 +1 -1 +1 +1)，可以得到
 
-![](http://latex.codecogs.com/gif.latex?\\\\$$ \frac{1}{m} \vec{S} \cdot \vec{S} = 1 $)
+![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$)
 
-![](http://latex.codecogs.com/gif.latex?\\\\$$ \frac{1}{m} \vec{S} \cdot \vec{S'} = -1 $)
+![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S'}=-1$)
 
 其中 $\vec{S'}$ 为 $\vec{S}$ 的反码。
 
