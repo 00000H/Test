@@ -47,6 +47,8 @@ x ^ 1s = ~x     x & 1s = x      x | 1s = 1s
 x ^ x = 0       x & x = x       x | x = x
 ```
 
+<div align="center"><img src="https://latex.codecogs.com/gif.latex?1^{a}" title="1^{a}" /></div>
+
 
 为了方便，取 m=8，设码片 $\vec{S}$ 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
 
