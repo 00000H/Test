@@ -50,7 +50,9 @@ x ^ x = 0       x & x = x       x | x = x
 
 为了方便，取 m=8，设码片 $\vec{S}$ 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
 
-<div align="center">![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$) </div>
+<div align="center">![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$)</div>
+
+![](http://latex.codecogs.com/gif.latex?\\\\$$\frac{1}{m}\vec{S}\cdot\vec{S}=1$)
 
 # 基础概念
 
