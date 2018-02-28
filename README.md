@@ -1,43 +1,43 @@
 <!-- GFM-TOC -->
 * [基础概念](#基础概念)
-    * [Web 基础](#web基础)
-    * [ URL](# url)
-    * [ 请求和响应报文](# 请求和响应报文)
-* [ HTTP 方法](# http 方法)
-    * [ GET：获取资源](# get获取资源)
-    * [ POST：传输实体主体](# post传输实体主体)
-    * [ HEAD：获取报文首部](# head获取报文首部)
-    * [ PUT：上传文件](# put上传文件)
-    * [ DELETE：删除文件](# delete删除文件)
-    * [ OPTIONS：查询支持的方法](# options查询支持的方法)
-    * [ TRACE：追踪路径](# trace追踪路径)
-    * [ CONNECT：要求用隧道协议连接代理](# connect要求用隧道协议连接代理)
-* [ HTTP 状态码](# http 状态码)
-    * [ 2XX 成功](# 2xx 成功)
-    * [ 3XX 重定向](# 3xx 重定向)
-    * [ 4XX 客户端错误](# 4xx 客户端错误)
-    * [ 5XX 服务器错误](# 5xx 服务器错误)
-* [ HTTP 首部](# http 首部)
-    * [ 通用首部字段](# 通用首部字段)
-    * [ 请求首部字段](# 请求首部字段)
-    * [ 响应首部字段](# 响应首部字段)
-    * [ 实体首部字段](# 实体首部字段)
-* [ 具体应用](# 具体应用)
-    * [ Cookie](# cookie)
-    * [ 缓存](# 缓存)
-    * [ 持久连接](# 持久连接)
-    * [ 编码](# 编码)
-    * [ 分块传输](# 分块传输)
-    * [ 多部分对象集合](# 多部分对象集合)
-    * [ 范围请求](# 范围请求)
-    * [ 内容协商](# 内容协商)
-    * [ 虚拟主机](# 虚拟主机)
-    * [ 通信数据转发](# 通信数据转发)
-* [ HTTPs](# https)
-    * [ 加密](# 加密)
-    * [ 认证](# 认证)
-    * [ 完整性](# 完整性)
-* [ HTTP/1.0 与 HTTP/1.1 的区别](# http10 与 http11 的区别)
+    * [Web 基础](#web-基础)
+    * [URL](#url)
+    * [请求和响应报文](#请求和响应报文)
+* [HTTP 方法](#http-方法)
+    * [GET：获取资源](#get获取资源)
+    * [POST：传输实体主体](#post传输实体主体)
+    * [HEAD：获取报文首部](#head获取报文首部)
+    * [PUT：上传文件](#put上传文件)
+    * [DELETE：删除文件](#delete删除文件)
+    * [OPTIONS：查询支持的方法](#options查询支持的方法)
+    * [TRACE：追踪路径](#trace追踪路径)
+    * [CONNECT：要求用隧道协议连接代理](#connect要求用隧道协议连接代理)
+* [HTTP 状态码](#http-状态码)
+    * [2XX 成功](#2xx-成功)
+    * [3XX 重定向](#3xx-重定向)
+    * [4XX 客户端错误](#4xx-客户端错误)
+    * [5XX 服务器错误](#5xx-服务器错误)
+* [HTTP 首部](#http-首部)
+    * [通用首部字段](#通用首部字段)
+    * [请求首部字段](#请求首部字段)
+    * [响应首部字段](#响应首部字段)
+    * [实体首部字段](#实体首部字段)
+* [具体应用](#具体应用)
+    * [Cookie](#cookie)
+    * [缓存](#缓存)
+    * [持久连接](#持久连接)
+    * [编码](#编码)
+    * [分块传输](#分块传输)
+    * [多部分对象集合](#多部分对象集合)
+    * [范围请求](#范围请求)
+    * [内容协商](#内容协商)
+    * [虚拟主机](#虚拟主机)
+    * [通信数据转发](#通信数据转发)
+* [HTTPs](#https)
+    * [加密](#加密)
+    * [认证](#认证)
+    * [完整性](#完整性)
+* [HTTP/1.0 与 HTTP/1.1 的区别](#http10-与-http11-的区别)
 <!-- GFM-TOC -->
 
 
@@ -45,29 +45,31 @@
 
 ## Web 基础
 
-HTTP（HyperText Transfer Protocol，超为本传输协议）。
+- HTTP（HyperText Transfer Protocol，超为本传输协议）。
 
-WWW（Word Wide Web）的三种技术：HTML、HTTP、URL。
+- WWW（Word Wide Web）的三种技术：HTML、HTTP、URL。
 
-RFC（Request for Comments，征求修正意见书），互联网的设计文档。
+- RFC（Request for Comments，征求修正意见书），互联网的设计文档。
 
 ## URL
 
-URI（Uniform Resource Indentifier，统一资源标识符），URL（Uniform Resource Locator，统一资源定位符），URN（Uniform Resource Name，统一资源名称），例如 urn:isbn:0-486-27557-4 。URI 包含 URL 和 URN，目前 WEB 只有 URL 比较流行，所以见到的基本都是 URL。
+- URI（Uniform Resource Indentifier，统一资源标识符）
+- URL（Uniform Resource Locator，统一资源定位符）
+- URN（Uniform Resource Name，统一资源名称），例如 urn:isbn:0-486-27557-4 。
 
-URL格式：
+URI 包含 URL 和 URN，目前 WEB 只有 URL 比较流行，所以见到的基本都是 URL。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//4102b7d0-39b9-48d8-82ae-ac4addb7ebfb.jpg)
+![](index_files/4102b7d0-39b9-48d8-82ae-ac4addb7ebfb.jpg)
 
 ## 请求和响应报文
 
 **请求报文**
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//9dbb5fc2-936b-4c6d-b3a7-9617aae45080.jpg)
+![](index_files/9dbb5fc2-936b-4c6d-b3a7-9617aae45080.jpg)
 
 **响应报文**
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c634b5ed-a14b-4302-b40e-3ee387dd3c8a.jpg)
+![](index_files/c634b5ed-a14b-4302-b40e-3ee387dd3c8a.jpg)
 
 # HTTP 方法
 
@@ -120,13 +122,13 @@ GET 的传参方式相比于 POST 安全性较差，因为 GET 传的参数在 U
 
 TRACE 一般不会使用，并且它容易受到 XST 攻击（Cross-Site Tracing，跨站追踪），因此更不会去使用它。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//ca711108-e937-4d7d-99aa-61b325c61f1a.jpg)
+![](index_files/ca711108-e937-4d7d-99aa-61b325c61f1a.jpg)
 
 ## CONNECT：要求用隧道协议连接代理
 
 主要使用 SSL（Secure Sokets Layer，安全套接字）和 TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//d8355d56-aa2b-4452-8001-8475cc095af1.jpg)
+![](index_files/d8355d56-aa2b-4452-8001-8475cc095af1.jpg)
 
 # HTTP 状态码
 
@@ -142,47 +144,49 @@ TRACE 一般不会使用，并且它容易受到 XST 攻击（Cross-Site Tracing
 
 ## 2XX 成功
 
-**200 OK**
+- **200 OK**
 
-**204 No Content**：请求已经成功处理，但是返回的响应报文不包含实体的主体部分。一般在只需要从客户端往服务器发送信息，而不需要返回数据时使用。
+- **204 No Content**：请求已经成功处理，但是返回的响应报文不包含实体的主体部分。一般在只需要从客户端往服务器发送信息，而不需要返回数据时使用。
 
-**206 Partial Content**
+- **206 Partial Content**
 
 ## 3XX 重定向
 
-**301 Moved Permanently**：永久性重定向
+- **301 Moved Permanently**：永久性重定向
 
-**302 Found**：临时性重定向
+- **302 Found**：临时性重定向
 
-**303 See Other**
+- **303 See Other**
 
-注：虽然 HTTP 协议规定 301、302 状态下重定向时不允许把 POST 方法改成 GET 方法，但是大多数浏览器都会 在 301、302 和 303 状态下的重定向把 POST 方法改成 GET 方法。
+- 注：虽然 HTTP 协议规定 301、302 状态下重定向时不允许把 POST 方法改成 GET 方法，但是大多数浏览器都会 在 301、302 和 303 状态下的重定向把 POST 方法改成 GET 方法。
 
-**304 Not Modified**：如果请求报文首部包含一些条件，例如：If-Match，If-ModifiedSince，If-None-Match，If-Range，If-Unmodified-Since，但是不满足条件，则服务器会返回 304 状态码。
+- **304 Not Modified**：如果请求报文首部包含一些条件，例如：If-Match，If-ModifiedSince，If-None-Match，If-Range，If-Unmodified-Since，但是不满足条件，则服务器会返回 304 状态码。
 
-**307 Temporary Redirect**：临时重定向，与 302 的含义类似，但是 307 要求浏览器不会把重定向请求的 POST 方法改成 GET 方法。
+- **307 Temporary Redirect**：临时重定向，与 302 的含义类似，但是 307 要求浏览器不会把重定向请求的 POST 方法改成 GET 方法。
 
 ## 4XX 客户端错误
 
-**400 Bad Request**：请求报文中存在语法错误
+- **400 Bad Request**：请求报文中存在语法错误
 
-**401 Unauthorized**：该状态码表示发送的请求需要有通过 HTTP 认证（BASIC 认证、DIGEST 认证）的认证信息。如果之前已进行过一次请求，则表示用户认证失败。
+- **401 Unauthorized**：该状态码表示发送的请求需要有通过 HTTP 认证（BASIC 认证、DIGEST 认证）的认证信息。如果之前已进行过一次请求，则表示用户认证失败。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//b1b4cf7d-c54a-4ff1-9741-cd2eea331123.jpg)
+![](index_files/b1b4cf7d-c54a-4ff1-9741-cd2eea331123.jpg)
 
-**403 Forbidden**：请求被拒绝，服务器端没有必要给出拒绝的详细理由。
+- **403 Forbidden**：请求被拒绝，服务器端没有必要给出拒绝的详细理由。
 
-**404 Not Found**
+- **404 Not Found**
 
 ## 5XX 服务器错误
 
-**500 Internal Server Error**：服务器正在执行请求时发生错误
+- **500 Internal Server Error**：服务器正在执行请求时发生错误
 
-**503 Service Unavilable**：该状态码表明服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。
+- **503 Service Unavilable**：该状态码表明服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。
 
 # HTTP 首部
 
-有 4 种类型的首部字段：通用首部字段、请求首部字段、响应首部字段和实体首部字段。各种首部字段及其含义如下（不需要全记，仅供查阅）：
+有 4 种类型的首部字段：通用首部字段、请求首部字段、响应首部字段和实体首部字段。
+
+各种首部字段及其含义如下（不需要全记，仅供查阅）：
 
 ## 通用首部字段
 
@@ -259,7 +263,7 @@ HTTP 协议是无状态的，主要是为了让 HTTP 协议尽可能简单，使
 
 服务器发送的响应报文包含 Set-Cookie 字段，客户端得到响应报文后把 Cookie 内容保存到浏览器中。下次再发送请求时，从浏览器中读出 Cookie 值，在请求报文中包含 Cookie 字段，这样服务器就知道客户端的状态信息了。Cookie 状态信息保存在客户端浏览器中，而不是服务器上。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//ff17c103-750a-4bb8-9afa-576327023af9.png)
+![](index_files/ff17c103-750a-4bb8-9afa-576327023af9.png)
 
 Set-Cookie 字段有以下属性：
 
@@ -298,13 +302,13 @@ Expires 字段可以用于告知缓存服务器该资源什么时候会过期。
 
 当浏览器访问一个包含多张图片的 HTML 页面时，除了请求访问 HTML 页面资源，还会请求图片资源，如果每进行一次 HTTP 通信就要断开一次 TCP 连接，连接建立和断开的开销会很大。**持久连接** 只需要进行一次 TCP 连接就能进行多次 HTTP 通信。HTTP/1.1 开始，所有的连接默认都是持久连接。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c73a0b78-5f46-4d2d-a009-dab2a999b5d8.jpg)
+![](index_files/c73a0b78-5f46-4d2d-a009-dab2a999b5d8.jpg)
 
 持久连接需要使用 Connection 首部字段进行管理。HTTP/1.1 开始 HTTP 默认是持久化连接的，如果要断开 TCP 连接，需要由客户端或者服务器端提出断开，使用 Connection: close；而在 HTTP/1.1 之前默认是非持久化连接的，如果要维持持续连接，需要使用 Keep-Alive。
 
 管线化方式可以同时发送多个请求和响应，而不需要发送一个请求然后等待响应之后再发下一个请求。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//6943e2af-5a70-4004-8bee-b33d60f39da3.jpg)
+![](index_files/6943e2af-5a70-4004-8bee-b33d60f39da3.jpg)
 
 ## 编码
 
@@ -320,7 +324,7 @@ Expires 字段可以用于告知缓存服务器该资源什么时候会过期。
 
 例如，上传多个表单时可以使用如下方式：
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//decb0936-e83c-4a55-840a-fe8aa101ac61.png)
+![](index_files/decb0936-e83c-4a55-840a-fe8aa101ac61.png)
 
 ## 范围请求
 
@@ -346,19 +350,19 @@ Expires 字段可以用于告知缓存服务器该资源什么时候会过期。
 
 使用代理的主要目的是：缓存、网络访问控制以及记录访问日志。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//c07035c3-a9ba-4508-8e3c-d8ae4c6ee9ee.jpg)
+![](index_files/c07035c3-a9ba-4508-8e3c-d8ae4c6ee9ee.jpg)
 
 **网关**
 
 与代理服务器不同的是，网关服务器会将 HTTP 转化为其它协议进行通信，从而请求其它非 HTTP 服务器的服务。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//81375888-6be1-476f-9521-42eea3e3154f.jpg)
+![](index_files/81375888-6be1-476f-9521-42eea3e3154f.jpg)
 
 **隧道**
 
 使用 SSL 等加密手段，为客户端和服务器之间建立一条安全的通信线路。
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//64b95403-d976-421a-8b45-bac89c0b5185.jpg)
+![](index_files/64b95403-d976-421a-8b45-bac89c0b5185.jpg)
 
 # HTTPs
 
@@ -378,7 +382,7 @@ HTTPs 并不是新协议，而是 HTTP 先和 SSL（Secure Socket Layer）通信
 
 HTTPs 采用 **混合的加密机制**，使用公开密钥加密用于传输对称密钥，之后使用对称密钥加密进行通信。（下图中，共享密钥即对称密钥）
 
-![](https://github.com/CyC2018/InterviewNotes/blob/master/pics//110b1a9b-87cd-45c3-a21d-824623715b33.jpg)
+![](index_files/110b1a9b-87cd-45c3-a21d-824623715b33.jpg)
 
 ## 认证
 
