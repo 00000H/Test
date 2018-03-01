@@ -16,7 +16,7 @@
 
 对题目做了一个分类，并对每种题型的解题思路做了总结。已经整理了 300+ 的题目，基本涵盖所有经典题目。
 
-# 网络 :pencil2:
+# 网络 :pencil:
 
 > [计算机网络](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/计算机网络.md)
 
@@ -26,7 +26,7 @@
 
 整理自《图解 HTTP》
 
-# 操作系统 :pencil2:
+# 操作系统 :black_nib:
 
 > [计算机操作系统](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/计算机操作系统.md)
 
