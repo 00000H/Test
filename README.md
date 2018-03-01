@@ -46,7 +46,7 @@
 
 一些面向对象思想和原则。
 
-# 数据库 :pencil2:
+# 数据库 :floppy_disk:
 
 > [SQL 语法](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/SQL%20语法.md)
 
