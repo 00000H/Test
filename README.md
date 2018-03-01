@@ -2,7 +2,7 @@
 <img src="https://github.com/CyC2018/InterviewNotes/blob/master/pics/handbook.png" alt="" width="225"/>
 <br>
 
-# :pencil2: 数据结构与算法
+# 数据结构与算法 :pencil2:
 
 > [算法](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/算法.md)
 
@@ -16,7 +16,7 @@
 
 对题目做了一个分类，并对每种题型的解题思路做了总结。已经整理了 300+ 的题目，基本涵盖所有经典题目。
 
-# 网络
+# 网络 :pencil2:
 
 > [计算机网络](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/计算机网络.md)
 
@@ -26,7 +26,7 @@
 
 整理自《图解 HTTP》
 
-# 操作系统
+# 操作系统 :pencil2:
 
 > [计算机操作系统](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/计算机操作系统.md)
 
@@ -36,7 +36,7 @@
 
 整理自《鸟哥的 Linux 私房菜》
 
-# 面向对象
+# 面向对象 :pencil2:
 
 > [设计模式](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/设计模式.md)
 
@@ -46,7 +46,7 @@
 
 一些面向对象思想和原则。
 
-# 数据库
+# 数据库 :pencil2:
 
 > [SQL 语法](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/SQL%20语法.md)
 
@@ -56,7 +56,7 @@
 
 整理自《高性能 MySQL》，整理了一些重点内容。
 
-# Java
+# Java :pencil2:
 
 > [JVM](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/JVM.md)
 
@@ -74,7 +74,7 @@ File、InputStream 和 OutputStream、Reader 和 Writer、Serializable、Socket 
 
 整理了一些常见考点。
 
-# 编码实践
+# 编码实践 :pencil2:
 
 > [重构](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/重构.md)
 
