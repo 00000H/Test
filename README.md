@@ -16,7 +16,7 @@
 
 对题目做了一个分类，并对每种题型的解题思路做了总结。已经整理了 300+ 的题目，基本涵盖所有经典题目。
 
-# 网络 :pencil:
+# 网络 :cloud:
 
 > [计算机网络](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/计算机网络.md)
 
@@ -26,7 +26,7 @@
 
 整理自《图解 HTTP》
 
-# 操作系统 :black_nib:
+# 操作系统 :computer:
 
 > [计算机操作系统](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/计算机操作系统.md)
 
@@ -36,7 +36,7 @@
 
 整理自《鸟哥的 Linux 私房菜》
 
-# 面向对象 :pencil2:
+# 面向对象 :couple:
 
 > [设计模式](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/设计模式.md)
 
@@ -56,7 +56,7 @@
 
 整理自《高性能 MySQL》，整理了一些重点内容。
 
-# Java :pencil2:
+# Java :coffee:
 
 > [JVM](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/JVM.md)
 
@@ -74,7 +74,7 @@ File、InputStream 和 OutputStream、Reader 和 Writer、Serializable、Socket 
 
 整理了一些常见考点。
 
-# 编码实践 :pencil2:
+# 编码实践 :hammer:
 
 > [重构](https://github.com/CyC2018/InnterviewNotes/blob/master/notes/重构.md)
 
@@ -88,7 +88,7 @@ File、InputStream 和 OutputStream、Reader 和 Writer、Serializable、Socket 
 
 Google 开源项目的代码风格规范。
 
-# 资料下载
+# 资料下载 :arrow_down:
 
 > [百度网盘](https://pan.baidu.com/s/1o9oD1s2#list/path=%2F)
 
