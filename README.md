@@ -2,7 +2,10 @@
 <img src="https://github.com/CyC2018/InterviewNotes/blob/master/pics/handbook.png" alt="" width="225"/>
 <br>
 
-![](https://img.shields.io/badge/platform-ios-lightgrey.svg)
+
+
+
+[![GitHub issue last update](https://img.shields.io/github/issues/detail/last-update/badges/shields/979.svg)](https://github.com/CyC2018/Interview-Notebook) ![](https://img.shields.io/badge/gitbook-making-blue.svg)
 
 # 数据结构与算法 :pencil2:
 
