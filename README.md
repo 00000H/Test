@@ -4,6 +4,8 @@
 
 
 
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/google/skia/infra/config.svg?style=flat-square)](https://github.com/CyC2018/Interview-Notebook)
+
 
 [![GitHub issue last update](https://img.shields.io/github/issues/detail/last-update/badges/shields/979.svg)](https://github.com/CyC2018/Interview-Notebook) ![](https://img.shields.io/badge/gitbook-making-blue.svg)
 
