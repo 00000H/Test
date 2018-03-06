@@ -1,7 +1,7 @@
 
 <br>
 <div align="center"> 
-    <img src="https://github.com/CyC2018/InterviewNotes/blob/master/pics/handbook.png" alt="" width="250"/> <br><br>
+    <img src="https://github.com/CyC2018/InterviewNotes/blob/master/pics/handbook.png" alt="" width="250" height="300"/> <br><br>
     <img src="https://img.shields.io/badge/update-today-blue.svg"/> <img src="https://img.shields.io/badge/gitbook-making-yellow.svg"/>
 </div>
 <!-- <img src="https://github.com/CyC2018/InterviewNotes/blob/master/pics/handbook.png" alt="" width="225"/> -->
