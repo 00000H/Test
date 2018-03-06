@@ -1,14 +1,6 @@
 
-<h1 align="center">Interview Notebook</h1>
-<br>
-<div align="center"> 
-    <img src="https://github.com/CyC2018/InterviewNotes/blob/master/pics/handbook.png" alt="" width="250" height="130"/> <br><br>
-    <img src="https://img.shields.io/badge/update-today-blue.svg"/> <img src="https://img.shields.io/badge/gitbook-making-yellow.svg"/>
-</div>
-<!-- <img src="https://github.com/CyC2018/InterviewNotes/blob/master/pics/handbook.png" alt="" width="225"/> -->
-<br>
 
-<!-- ![](https://img.shields.io/badge/update-today-blue.svg) ![](https://img.shields.io/badge/gitbook-making-yellow.svg) -->
+![](https://img.shields.io/badge/update-today-blue.svg) ![](https://img.shields.io/badge/gitbook-making-yellow.svg)
 
 ## 网络 :cloud:
 
