@@ -11,7 +11,7 @@
 ![](https://img.shields.io/badge/update-today-blue.svg) ![](https://img.shields.io/badge/gitbook-making-lightgrey.svg) 
 
 <!-- GFM-TOC -->
-    * [网络 :cloud:](#网络-cloud)
+    * [网络](#网络-cloud)
     * [操作系统 :computer:](#操作系统-:computer:)
     * [数据结构与算法 :pencil2:](#数据结构与算法-:pencil2:)
     * [面向对象 :couple:](#面向对象-:couple:)
