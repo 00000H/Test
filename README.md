@@ -11,18 +11,18 @@
 ![](https://img.shields.io/badge/update-today-blue.svg) ![](https://img.shields.io/badge/gitbook-making-lightgrey.svg) 
 
 <!-- GFM-TOC -->
-[网络 :cloud:](#网络-:cloud:)
-[操作系统 :computer:](#操作系统-:computer:)
-[数据结构与算法 :pencil2:](#数据结构与算法-:pencil2:)
-[面向对象 :couple:](#面向对象-:couple:)
-[数据库 :floppy_disk:](#数据库-:floppy_disk:)
-[Java :coffee:](#java-:coffee:)
-[分布式 :sweat_drops:](#分布式-:sweat_drops:)
-[工具 :hammer:](#工具-:hammer:)
-[编码实践 :speak_no_evil:](#编码实践-:speak_no_evil:)
-[资料下载 :arrow_down:](#资料下载-:arrow_down:)
-[后记 :memo:](#后记-:memo:)
-[License](#license)
+- [网络 :cloud:](#网络-cloud
+- [操作系统 :computer:](#操作系统-computer
+- [数据结构与算法 :pencil2:](#数据结构与算法-pencil2
+- [面向对象 :couple:](#面向对象-couple
+- [数据库 :floppy_disk:](#数据库-floppy_disk
+- [Java :coffee:](#java-coffee
+- [分布式 :sweat_drops:](#分布式-sweat_drops
+- [工具 :hammer:](#工具-hammer
+- [编码实践 :speak_no_evil:](#编码实践-speak_no_evil
+- [资料下载 :arrow_down:](#资料下载-arrow_down
+- [后记 :memo:](#后记-memo
+- [License](#license)
 <!-- GFM-TOC -->
 
 
