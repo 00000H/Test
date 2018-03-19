@@ -10,7 +10,6 @@
 
 ![](https://img.shields.io/badge/update-today-blue.svg) ![](https://img.shields.io/badge/gitbook-making-lightgrey.svg) 
 
-<!-- GFM-TOC -->
     * [网络](#网络-cloud)
     
     * [操作系统 :computer:](#操作系统-:computer:)
@@ -24,7 +23,6 @@
     * [资料下载 :arrow_down:](#资料下载-:arrow_down:)
     * [后记 :memo:](#后记-:memo:)
     * [License](#license)
-<!-- GFM-TOC -->
 
 
 ## 网络 :cloud:
